@@ -1,0 +1,181 @@
+
+import React  from 'react';
+//import axios from 'axios';
+import axios from "axios";
+import {
+    StyleSheet,
+    View,
+    Text,
+    Button
+} from 'react-native';
+
+export default class App extends React.Component {
+
+
+        constructor() {
+            super(),
+                this.state = {
+                    text: '',
+                    item: '',
+                    ptext: '',
+                };
+        }
+
+    render() {
+
+        return (
+            <View style={styles.container}>
+                <Button onPress={this._postData} title="Post Data" />
+                <Text style={styles.welcome}>{this.state.ptext}</Text>
+            </View>
+        )
+    }
+
+
+  
+
+
+
+    _postData = async () => {
+
+        let formData = new FormData();
+        formData.append('grant_type', 'client_credentials');
+        //let  encode = window.btoa('iDR3vOOEjQbAfmArJ9WBLp7qAoJGApAh:su0TqRVpMhgsOGLp');
+        //let auth ='Basic '+encode;
+        //let header = new Headers();
+        // header.append('Authorization', auth);
+        // console.log(auth);
+        // header.append('Authorization', 'Basic aURSM3ZPT0VqUWJBZm1Bcko5V0JMcDdxQW9KR0FwQWg6c3UwVHFSVnBNaGdzT0dMcA==');
+        // header.append('Content-Type', 'application/x-www-form-urlencoded');
+        // header.append('Accept-Language', 'en-US');
+        fetch('https://api.pilot.principal.com/oauth-api/token/client', {
+            method: 'POST',
+            headers:{
+                'Authorization': 'Basic aURSM3ZPT0VqUWJBZm1Bcko5V0JMcDdxQW9KR0FwQWg6c3UwVHFSVnBNaGdzT0dMcA==',
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Accept-Language': 'en-US',
+             },
+            body: formData
+        }).then((response) => {console.log(response)})
+            // .then((responseJson) => {
+            //     console.log(responseJson)
+            //     this.setState({ ptext: JSON.stringify(responseJson) })
+            // })
+            .catch((error) => {
+                console.log(error)
+                this.setState({ ptext: error })
+            });
+
+
+        // try {
+        //     let response = await fetch('https://api.pilot.principal.com/oauth-api/token/client', {
+        //         method: 'POST',
+        //         headers: header,
+        //         body: formData
+        //     });
+
+        //     let result = await response.json();
+        //     console.log(result);
+        // }
+        // catch (e) {
+        //     console.log(e);
+        // }
+    }
+
+
+    _postDataAxios = async () => {
+        let formData = new FormData();
+        formData.append('grant_type', 'client_credentials');
+       try {
+            const response = await axios.post('https://api.pilot.principal.com/oauth-api/token/client/',{
+                headers:{
+                    'Authorization': 'Basic aURSM3ZPT0VqUWJBZm1Bcko5V0JMcDdxQW9KR0FwQWg6c3UwVHFSVnBNaGdzT0dMcA==',
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Accept-Language': 'en-US',
+                 },
+                 body: JSON.stringify(formData) ,
+                });
+            console.log(response);
+            //console.log(await response.json());
+        } catch (e) {
+            //console.log(response);
+            console.log(e);
+        }
+    }
+
+
+
+    _postDataXml = async () => {
+
+        var url = "https://api.pilot.principal.com/oauth-api/token/client";
+
+        let formData = new FormData();
+        formData.append('grant_type', 'client_credentials');
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader('Authorization', 'Basic aURSM3ZPT0VqUWJBZm1Bcko5V0JMcDdxQW9KR0FwQWg6c3UwVHFSVnBNaGdzT0dMcA==');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader('Accept-Language', 'en-US');
+        try {
+            xhr.send(formData);
+            xhr.onload = function () {
+                console.log(xhr.status)
+                if (xhr.readyState == 4 && xhr.status == "201") {
+                    console.log(JSON.parse(xhr.responseText));
+                } else {
+                    console.log(JSON.parse(xhr.responseText));
+                }
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+
+
+
+
+
+   
+
+
+
+
+   
+
+    // _postData1 = async () => {
+
+    //   let formData = new FormData();
+    //   formData.append('name', 'vkkkk');
+    //   formData.append('job', '1231');
+
+    //   this.setState({ text: 'Clicked' })
+    //   fetch('https://reqres.in/api/users', {
+    //     method: 'POST',
+    //     body: formData
+    //   }).then((response) => response.json())
+    //     .then((responseJson) => {
+    //       this.setState({ text: JSON.stringify(responseJson) })
+    //     })
+    // }   
+
+
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+    },
+    welcome: {
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 10,
+    },
+});
+
+
