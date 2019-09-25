@@ -48,7 +48,7 @@ export default class App extends React.Component {
         // header.append('Authorization', 'Basic aURSM3ZPT0VqUWJBZm1Bcko5V0JMcDdxQW9KR0FwQWg6c3UwVHFSVnBNaGdzT0dMcA==');
         // header.append('Content-Type', 'application/x-www-form-urlencoded');
         // header.append('Accept-Language', 'en-US');
-        fetch('https://api.pilot.principal.com/oauth-api/token/client', {
+        fetch('https://api.pilot.xyz.com/oauth-api/token/client', {
             method: 'POST',
             headers:{
                 'Authorization': 'Basic aURSM3ZPT0VqUWJBZm1Bcko5V0JMcDdxQW9KR0FwQWg6c3UwVHFSVnBNaGdzT0dMcA==',
@@ -68,7 +68,7 @@ export default class App extends React.Component {
 
 
         // try {
-        //     let response = await fetch('https://api.pilot.principal.com/oauth-api/token/client', {
+        //     let response = await fetch('https://api.pilot.xyz.com/oauth-api/token/client', {
         //         method: 'POST',
         //         headers: header,
         //         body: formData
@@ -87,7 +87,7 @@ export default class App extends React.Component {
         let formData = new FormData();
         formData.append('grant_type', 'client_credentials');
        try {
-            const response = await axios.post('https://api.pilot.principal.com/oauth-api/token/client/',{
+            const response = await axios.post('https://api.pilot.xyz.com/oauth-api/token/client/',{
                 headers:{
                     'Authorization': 'Basic aURSM3ZPT0VqUWJBZm1Bcko5V0JMcDdxQW9KR0FwQWg6c3UwVHFSVnBNaGdzT0dMcA==',
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -107,7 +107,7 @@ export default class App extends React.Component {
 
     _postDataXml = async () => {
 
-        var url = "https://api.pilot.principal.com/oauth-api/token/client";
+        var url = "https://api.pilot.xyz.com/oauth-api/token/client";
 
         let formData = new FormData();
         formData.append('grant_type', 'client_credentials');
